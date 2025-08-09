@@ -1,11 +1,245 @@
 <html lang="en">
-   <head>
+         <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <!-- AOS Animation Library -->
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <title>Cameron Rohlfsen</title>
-      <style> body { padding-top: 5rem; padding-bottom: 3rem; padding-left: 3rem; padding-right: 3rem; color: #5a5a5a; } .carousel { margin-bottom: 4rem; } .carousel-caption { bottom: 3rem; z-index: 10; } .carousel-item { height: 32rem; } .carousel-item>img { position: absolute; top: 0; left: 0; min-width: 100%; height: 32rem; } .marketing .col-lg-4 { margin-bottom: 1.5rem; text-align: center; } .marketing h2 { font-weight: 400; } .marketing .col-lg-4 p { margin-right: .75rem; margin-left: .75rem; } .featurette-divider { margin: 5rem 0; } .featurette-heading { font-weight: 300; line-height: 1; letter-spacing: -.05rem; } @media (min-width: 40em) { .carousel-caption p { margin-bottom: 1.25rem; font-size: 1.25rem; line-height: 1.4; } .featurette-heading { font-size: 50px; } } @media (min-width: 62em) { .featurette-heading { margin-top: 7rem; } } .bd-placeholder-img { font-size: 1.125rem; text-anchor: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } @media (min-width: 768px) { .bd-placeholder-img-lg { font-size: 3.5rem; } } </style>
+      <style>
+         :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --light-bg: #f8f9fa;
+         }
+
+         body {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         }
+
+         .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+         }
+
+         .navbar-brand {
+            font-weight: 600;
+            color: white !important;
+         }
+
+         .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            transition: color 0.3s ease;
+         }
+
+         .nav-link:hover {
+            color: white !important;
+         }
+
+         .featurette-heading {
+            font-weight: 600;
+            color: var(--primary-color);
+         }
+
+         .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transition: all 0.3s ease;
+         }
+
+         .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+         }
+
+         .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+         }
+
+         .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+         }
+
+         .skill-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+         }
+
+         .skill-progress {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+         }
+
+         .carousel-item {
+            height: 500px;
+         }
+
+         .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+         }
+
+         .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+         }
+
+         .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+         }
+
+         .photo-item:hover {
+            transform: scale(1.05);
+         }
+
+         .photo-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+         }
+
+         .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+         }
+
+         .photo-item:hover .photo-caption {
+            transform: translateY(0);
+         }
+
+         @media (max-width: 768px) {
+            body {
+               padding: 1rem;
+            }
+            .carousel-item {
+               height: 300px;
+            }
+         }
+
+         .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+         }
+         
+         .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+         }
+         
+         .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+         }
+         
+         .lightbox-caption {
+            color: white;
+            text-align: center;
+            padding: 1rem;
+         }
+         
+         .close-lightbox {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+         }
+
+         .custom-carousel {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+         }
+         
+         .custom-carousel .carousel-inner {
+            height: 800px;
+         }
+         
+         .custom-carousel .carousel-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+         }
+         
+         .custom-carousel .carousel-caption {
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+            margin: 0 auto;
+         }
+         
+         .custom-carousel .carousel-caption h5 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+         }
+         
+         .custom-carousel .carousel-caption p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+         }
+         
+         .custom-carousel .carousel-control-prev,
+         .custom-carousel .carousel-control-next {
+            width: 5%;
+            opacity: 0.8;
+         }
+         
+         .custom-carousel .carousel-indicators {
+            bottom: 20px;
+         }
+         
+         .custom-carousel .carousel-indicators li {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 8px;
+         }
+      </style>
    </head>
     <body>
         <header>
